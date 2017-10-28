@@ -3,7 +3,7 @@ WORKING_DIR := $(shell pwd)
 
 DOCKER_REGISTRY ?= hub.docker.com
 DOCKER_USERNAME ?= ramz
-IMAGE_NAME ?= devlabs-gocd-server
+IMAGE_NAME ?= gocd-server
 IMAGE_VERSION ?= latest
 IMAGE_TAG = $(DOCKER_REGISTRY)/$(DOCKER_USERNAME)/$(IMAGE_NAME):$(IMAGE_VERSION)
 
