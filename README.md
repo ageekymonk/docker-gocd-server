@@ -21,3 +21,16 @@ make push
 ```
 make release
 ```
+
+### Build Arguments
+
+| ARGUMENT       |               |
+| -------------  | ------------- |
+| `http_proxy`   | Content Cell  |
+| `https_proxy`  | Content Cell  |
+| `no_proxy`     |               |
+| `GOCD_VERSION` |               |
+| `UID`          |               |
+| `GID`          |               |
+| `LANG`         |               |
+|                |               |
