@@ -47,3 +47,25 @@ docker pull ramz/gocd-server:17.10.0
 ```
 docker run -d -p8153:8153 -p8154:8154 ramz/gocd-server:17.10.0
 ```
+
+### Runtime Configs
+The GoCD server will store all configuration, pipeline history database, artifacts, plugins, and logs into /godata. If you'd like to provide secure credentials like SSH private keys among other things, you can mount /home/go
+
+```
+docker run -v /path/to/godata:/godata -v /path/to/home-dir:/home/go ramz/gocd-server:17.10.0
+```
+
+### Directory Structure
+
+The GoCD server runs as the go user, the location of the various directories is:
+
+
+| Directory           | Description                                                                      |
+|---------------------|----------------------------------------------------------------------------------|
+| `/godata/addons`    | the directory where GoCD addons are stored                                       |
+| `/godata/artifacts` | the directory where GoCD artifacts are stored                                    |
+| `/godata/config`    | the directory where the GoCD configuration is store                              |
+| `/godata/db`        | the directory where the GoCD database and configuration change history is stored |
+| `/godata/logs`      | the directory where GoCD logs will be written out to                             |
+| `/godata/plugins`   | the directory containing GoCD plugins                                            |
+| `/home/go`          | the home directory for the GoCD server                                           |
