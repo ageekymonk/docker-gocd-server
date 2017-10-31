@@ -2,10 +2,10 @@ FROM alpine:3.6
 
 MAINTAINER ageekymonk <ramzthecoder@gmail.com>
 
-ARG GOCD_VERSION=17.10.0
+ARG GOCD_VERSION=17.11.0
 ARG GOCD_SRC_URL=https://github.com/gocd/gocd
-ARG GOCD_GIT_SHA=05598d88fd4dabdde1184faa4fbffc5f9406d0dc
-ARG GOCD_URL=https://download.gocd.org/binaries/17.10.0-5380/generic/go-server-17.10.0-5380.zip
+ARG GOCD_GIT_SHA=9f6909e2f64b07d2dce5cecd4ea5b92b8e19d6b1
+ARG GOCD_URL=https://download.gocd.org/binaries/17.11.0-5520/generic/go-server-17.11.0-5520.zip
 ARG LANG=en_AU.utf8
 ARG UID=1000
 ARG GID=1000
@@ -28,14 +28,9 @@ RUN \
   curl --fail --location --silent --show-error "${GOCD_URL}" > /tmp/go-server.zip && \
   unzip /tmp/go-server.zip -d / && \
   rm /tmp/go-server.zip && \
-  mv go-server-${GOCD_VERSION} /go-server && \
-  sed -i -e 's/\(log4j.rootLogger.*\)/\1, stdout/g' /go-server/config/log4j.properties && \
-  echo "" >> /go-server/config/log4j.properties && \
-  echo "" >> /go-server/config/log4j.properties && \
-  echo "# Log to stdout" >> /go-server/config/log4j.properties && \
-  echo "log4j.appender.stdout=org.apache.log4j.ConsoleAppender" >> /go-server/config/log4j.properties && \
-  echo "log4j.appender.stdout.layout=org.apache.log4j.PatternLayout" >> /go-server/config/log4j.properties && \
-  echo "log4j.appender.stdout.layout.conversionPattern=%d{ISO8601} %5p [%t] %c{1}:%L - %m%n" >> /go-server/config/log4j.properties
+  mv go-server-${GOCD_VERSION} /go-server
+
+COPY logback-include.xml /go-server/config/logback-include.xml
 
 ADD docker-entrypoint.sh /
 
